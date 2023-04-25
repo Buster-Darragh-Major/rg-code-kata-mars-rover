@@ -1,15 +1,16 @@
+using System.Numerics;
+
 namespace MarsRoverKata;
 
 public class Tests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
-    public void Test1()
+    public void TestMovesInDirection()
     {
-        Assert.Pass();
+        var rover = new Rover(new Vector2(1, 1), Direction.N);
+        rover.Move(new [] { Movement.F });
+
+        Assert.Equals(rover.Location.X, 1);
+        Assert.Equals(rover.Location.Y, 2);
     }
 }

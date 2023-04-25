@@ -4,17 +4,23 @@ namespace MarsRoverKata;
 
 public class Rover
 {
-    private readonly Vector<int> _startingPoint;
-    private readonly Direction _direction;
+    public Vector2 Location { get; set; }
+    public Direction Direction { get; set; }
 
-    public Rover(Vector<int> startingPoint, Direction direction)
+    public Rover(Vector2 location, Direction direction)
     {
-        _startingPoint = startingPoint;
-        _direction = direction;
+        Location = location;
+        Direction = direction;
     }
 
     public void Move(IEnumerable<Movement> movements)
     {
-        
+        foreach (var movement in movements)
+        {
+            if (Direction == Direction.N)
+            {
+                Location += new Vector2(0, 1);
+            }
+        }
     }
 }
