@@ -4,6 +4,9 @@ namespace MarsRoverKata;
 
 public class Rover
 {
+    private const int MAX_SIZE_X = 4;
+    private const int MAX_SIZE_Y = 4;
+    
     public Vector2 Location { get; set; }
     public Direction Direction { get; set; }
 
@@ -21,7 +24,7 @@ public class Rover
             {
                 case Movement.F:
                 case Movement.B:
-                    Location += GetMovementVector(movement);
+                    Wrap(Location, GetMovementVector(movement));
                     break;
                 case Movement.L:
                 case Movement.R:
@@ -29,6 +32,26 @@ public class Rover
                     break;
             }
         }
+    }
+
+    private Vector2 Wrap(Vector2 currentLocation, Vector2 movementVector)
+    {
+        var newLocation = currentLocation + movementVector;
+        while (newLocation.X > MAX_SIZE_X)
+        {
+            newLocation -= new Vector2(MAX_SIZE_X, 0);
+        }
+
+        var yTraversals = newLocation.Y / MAX_SIZE_Y;
+        var yTraversalRemainder = newLocation.Y % MAX_SIZE_Y;
+        if (yTraversals > 0)
+        {
+            newLocation += yTraversals % 2 == 0
+                ? new Vector2(0, yTraversalRemainder)
+                : new Vector2(0, -yTraversalRemainder);
+        }
+
+        return newLocation;
     }
 
     private Vector2 GetMovementVector(Movement movement)
