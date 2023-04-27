@@ -17,17 +17,18 @@ public class Rover
     {
         foreach (var movement in movements)
         {
-            // if (movements == Movement.F)
-            // {
-            //     Location += new Vector2(0, 1);
-            // }
-            // else if (Direction == Direction.S)
-            // {
-            //     Location += new Vector2(0, -1);
-            // }
-            if ((movement == Movement.L) || (movement == Movement.R))
+            switch (movement)
             {
-                Direction = Turn(movement);
+                case Movement.F:
+                    Location += new Vector2(0, 1);
+                    break;
+                case Movement.B:
+                    Location += new Vector2(0, -1);
+                    break;
+                case Movement.L:
+                case Movement.R:
+                    Direction = Turn(movement);
+                    break;
             }
         }
     }
