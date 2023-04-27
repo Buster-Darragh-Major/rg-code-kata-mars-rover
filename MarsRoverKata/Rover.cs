@@ -20,10 +20,8 @@ public class Rover
             switch (movement)
             {
                 case Movement.F:
-                    Location += new Vector2(0, 1);
-                    break;
                 case Movement.B:
-                    Location += new Vector2(0, -1);
+                    Location += GetMovementVector(movement);
                     break;
                 case Movement.L:
                 case Movement.R:
@@ -31,6 +29,31 @@ public class Rover
                     break;
             }
         }
+    }
+
+    private Vector2 GetMovementVector(Movement movement)
+    {
+        Vector2 vector;
+        switch (Direction)
+        {
+            case Direction.N:
+                vector = new Vector2(0, 1);
+                break;
+            case Direction.E:
+                vector = new Vector2(1, 0);
+                break;
+            case Direction.S:
+                vector = new Vector2(0, -1);
+                break;
+            case Direction.W:
+                vector = new Vector2(-1, 0);
+                break;
+            default:
+                vector = new Vector2();
+                break;
+        }
+
+        return movement == Movement.F ? vector : vector * new Vector2(-1, -1);
     }
 
     private Direction Turn(Movement movement)

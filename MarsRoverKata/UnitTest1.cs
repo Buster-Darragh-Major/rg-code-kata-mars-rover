@@ -4,17 +4,6 @@ namespace MarsRoverKata;
 
 public class Tests
 {
-    
-    [Test]
-    public void TestMovesInDirection()
-    {
-        var rover = new Rover(new Vector2(1, 1), Direction.N);
-        rover.Move(new [] { Movement.F });
-
-        Assert.That(rover.Location.X, Is.EqualTo(1));
-        Assert.That(rover.Location.Y, Is.EqualTo(2));
-    }
-    
     [TestCase(Direction.N, 2,2,  new [] { Movement.F }, 2,3)]
     [TestCase(Direction.E, 2,2,  new [] { Movement.F }, 3,2)]
     [TestCase(Direction.S, 2,2,  new [] { Movement.F }, 2,1)]
